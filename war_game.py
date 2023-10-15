@@ -44,6 +44,16 @@ class Player:
         self.name = name
         self.hand = []
 
+    def __str__(self):
+        pass
+        # Create a string of cards using their __str__ method and join them with commas
+        #cards_string = ', '.join(str(card) for card in self.hand)
+        #return f"{self.name} has {len(self.hand)} cards: {cards_string}"
+
+    def draw(self):
+         return self.hand.pop(0)
+
+
 # Initialization
 player1_name, player2_name = get_player_names()
 player1 = Player(name=player1_name)
@@ -54,4 +64,10 @@ deck.shuffle()
 player1.hand, player2.hand = deck.split()
 # Welcome Message
 print(f"Welcome {player1.name} and {player2.name}. Let’s start the game!")
+# Directly print out each player's hand
+print(len(player1.hand))
+#print(f"{player1.name}'s hand: {[str(card) for card in player1.hand]}")
+#Make sure players can show their top card when it's their turn.
 
+#class Game:
+    #def __
