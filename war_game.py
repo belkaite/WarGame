@@ -54,20 +54,25 @@ class Player:
          return self.hand.pop(0)
 
 
-# Initialization
-player1_name, player2_name = get_player_names()
-player1 = Player(name=player1_name)
-player2 = Player(name=player2_name)
-deck = Deck()
-deck.shuffle()
-# Deal cards to players
-player1.hand, player2.hand = deck.split()
 # Welcome Message
 print(f"Welcome {player1.name} and {player2.name}. Let’s start the game!")
 # Directly print out each player's hand
 print(len(player1.hand))
-#print(f"{player1.name}'s hand: {[str(card) for card in player1.hand]}")
+
 #Make sure players can show their top card when it's their turn.
 
-#class Game:
-    #def __
+class Game:
+    def __init__(self, player1_name, player2_name):
+        self.player1 = Player(name=player1_name)
+        self.player2 = Player(name=player2_name)
+        self.deck = Deck()
+        self.deck.shuffle()
+    
+    def start(self):
+        self.player1.hand, self.player2.hand = self.deck.split()
+
+    def message(self):
+        print(f"Welcome {self.player1.name} and {self.player2.name}. Let’s start the game!")
+    
+
+
