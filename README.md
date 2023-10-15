@@ -14,7 +14,7 @@ A classic War card game implemented using Python and following the Object-Orient
 ## 🔄 Game Flow
 
 ### 1. Initialization
-- **Player Setup**: 👥 Obtain the names of the two players.
+- **Player Setup**: 👥 Get the names of the two players.
 - **Deck Setup**: 🃏 Initialize and shuffle a deck, distributing it evenly among the players.
 - **Start Message**: 🚦 Introduce players and announce the start of the game.
 
