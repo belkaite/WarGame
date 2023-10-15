@@ -55,11 +55,9 @@ class Player:
 
 
 # Welcome Message
-print(f"Welcome {player1.name} and {player2.name}. Let’s start the game!")
+# print(f"Welcome {player1.name} and {player2.name}. Let’s start the game!")
 # Directly print out each player's hand
-print(len(player1.hand))
-
-#Make sure players can show their top card when it's their turn.
+# print(len(player1.hand))
 
 class Game:
     def __init__(self, player1_name, player2_name):
@@ -73,6 +71,29 @@ class Game:
 
     def message(self):
         print(f"Welcome {self.player1.name} and {self.player2.name}. Let’s start the game!")
+
+    #Make sure players can show their top card when it's their turn.
+    def game_loop(self):
+
+        try:
+            while self.player1.hand != 0 or self.player2.hand != 0:
+                cards_shown = []
+                card_from_player1 = self.player1.draw
+                cards_shown.append(card_from_player1)
+                print(f"{player1.name} has placed {card_from_player1}")
+
+                card_from_player2 = self.player2.draw
+                cards_shown.append(card_from_player2)
+                print(f"{player2.name} has placed {card_from_player2}")
+
+                #if #rankas is pirmo playerio == #rankas is antro playerio:
+                    #War logic
+
+                
+        except:
+            pass
+
+
     
 
 
