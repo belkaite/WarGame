@@ -3,9 +3,9 @@ import random
 
 class Card:
     """
-    Represent a playing card.
-        rank: "2", "3", "4", ..., "King", "Ace".
-        suit: "Hearts", "Diamonds", "Clubs", "Spades".
+    Represents a single playing card with a specific rank and suit.
+    Rank can be: "2", "3", ..., "King", "Ace".
+    Suit can be: "Hearts", "Diamonds", "Clubs", "Spades".
     """
 
     def __init__(self, rank, suit):
@@ -18,9 +18,8 @@ class Card:
 
 class Deck:
     """
-    Represent a deck of 52 playing cards (does not include the Jokers).
-    Shullfte the deck.
-    Splits the deck for each player.
+    Represents a deck of 52 playing cards (does not include the Jokers).
+    Provides methods to shuffle the deck and split it evenly between two players.
     """
 
     def __init__(self):
@@ -52,6 +51,10 @@ class Deck:
 
 
 class Player:
+    """
+    Represents a player in the card game with a name and a hand (set of cards).
+    """
+
     def __init__(self, name):
         self.name = name
         self.hand = []
@@ -62,8 +65,11 @@ class Player:
 
 class Game:
     """
-    Continuously play rounds until one player has all the cards.
+    Orchestrates the War card game.
+
+    The game is played in rounds until one player has all the cards, or the game is forcibly ended.
     """
+
 
     def __init__(self, player1_name, player2_name):
         self.player1 = Player(name=player1_name)
@@ -78,12 +84,6 @@ class Game:
         pass
 
     def compare_cards(self, card1, card2):
-        """
-        Compares two cards. Returns:
-        - 0 if it's a tie.
-        - 1 if card1 is greater.
-        - 2 if card2 is greater.
-        """
         rank_order = [
             "2",
             "3",
@@ -111,9 +111,6 @@ class Game:
             return 0
 
     def game_loop(self):
-        """
-        Executes the main game loop until one of the players runs out of cards or the game is interrupted.
-        """
         war_pile = []
 
         print(
@@ -188,6 +185,10 @@ class Game:
 
 
 if __name__ == "__main__":
+    """
+    Initiates the War card game. Prompts for player names and starts the game loop.
+    """
+
     player1_name = input("Enter the name of player 1: ")
     player2_name = input("Enter the name of player 2: ")
     war_game = Game(player1_name, player2_name)
