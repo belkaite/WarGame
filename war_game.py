@@ -37,20 +37,9 @@ class Player:
         self.name = name
         self.hand = []
 
-    def __str__(self):
-        pass
-        # Create a string of cards using their __str__ method and join them with commas
-        #cards_string = ', '.join(str(card) for card in self.hand)
-        #return f"{self.name} has {len(self.hand)} cards: {cards_string}"
 
     def draw(self):
          return self.hand.pop(0)
-
-
-# Welcome Message
-# print(f"Welcome {player1.name} and {player2.name}. Let’s start the game!")
-# Directly print out each player's hand
-# print(len(player1.hand))
 
 class Game:
     """
@@ -68,9 +57,8 @@ class Game:
         self.player1.hand, self.player2.hand = self.deck.split()
 
     def message(self):
-        print(f"Welcome {self.player1.name} and {self.player2.name}. Let’s start the game!")
+        pass
 
-    #Make sure players can show their top card when it's their turn.
 
     def compare_cards(self, card1, card2):
         """
@@ -81,7 +69,6 @@ class Game:
         """
         rank_order = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
 
-        # Find the indices (positions) of the cards in the rank_order list
         card1_rank = rank_order.index(card1.rank)
         card2_rank = rank_order.index(card2.rank)
 
@@ -98,51 +85,58 @@ class Game:
         """
         war_pile = []
 
-        try:
-            while len(self.player1.hand) > 0 and len(self.player2.hand) > 0:
-                player1_card = self.player1.draw()
-                player2_card = self.player2.draw()
+        print(f"Welcome {self.player1.name} and {self.player2.name}. Let’s start the game? Yes/No")
+        welcome_msg = input().lower().strip()
 
-                print(f"{self.player1.name} reveals: {player1_card}")
-                print(f"{self.player2.name} reveals: {player2_card}")
+        if welcome_msg == "yes":
+            try:
+                while len(self.player1.hand) > 0 and len(self.player2.hand) > 0:
+                    player1_card = self.player1.draw()
+                    player2_card = self.player2.draw()
 
-                result = self.compare_cards(player1_card, player2_card)
+                    print(f"{self.player1.name} reveals: {player1_card}")
+                    print(f"{self.player2.name} reveals: {player2_card}")
 
-                if result == 0:
-                    print("It's a tie!")
-                    war_pile.extend([player1_card, player2_card])
-                    if len(self.player1.hand) == 0 or len(self.player2.hand) == 0:
-                        break
-                elif result == 1:
-                    self.player1.hand.extend([player1_card, player2_card])
-                    if war_pile:
-                        self.player1.hand.extend(war_pile)
-                        war_pile.clear()
-                    print(f"{self.player1.name} wins the round and collects the cards.")
-                else:
-                    self.player2.hand.extend([player1_card, player2_card])
-                    if war_pile:
-                        self.player2.hand.extend(war_pile)
-                        war_pile.clear()
-                    print(f"{self.player2.name} wins the round and collects the cards.")
+                    result = self.compare_cards(player1_card, player2_card)
+                    
+                    print("Press 'Enter' to see the result...")
+                    input()
 
-                # Prompt users if they want to continue
-                input("Press 'Enter' to play the next round or 'Ctrl + D' to conclude the game...")
+                    
+                    if result == 0:
+                        print("It's a tie!")
+                        war_pile.extend([player1_card, player2_card])
+                        if len(self.player1.hand) == 0 or len(self.player2.hand) == 0:
+                            break
+                    elif result == 1:
+                        self.player1.hand.extend([player1_card, player2_card])
+                        if war_pile:
+                            self.player1.hand.extend(war_pile)
+                            war_pile.clear()
+                        print(f"{self.player1.name} wins the round and collects the cards. The player has {len(self.player1.hand)} now, while {self.player2.name} has {len(self.player2.hand)}")
+                    else:
+                        self.player2.hand.extend([player1_card, player2_card])
+                        if war_pile:
+                                self.player2.hand.extend(war_pile)
+                                war_pile.clear()
+                        print(f"{self.player2.name} wins the round and collects the cards. The player has {len(self.player2.hand)} now, while {self.player1.name} has {len(self.player1.hand)}")
 
-        except EOFError:  # This catches the Ctrl+D
-            pass  # We'll handle the game conclusion outside the loop
+                    print("-" * 50)
+                    print("Next round is about to start...")
+                    input("Press 'Enter' to play the next round or 'Ctrl + D' to conclude the game...")
 
-        # Print the final results after breaking out of the loop
+            except EOFError:  
+                pass  
+            
         if len(self.player1.hand) == 0:
             print(f"{self.player2.name} wins the game with {len(self.player2.hand)} cards!")
         elif len(self.player2.hand) == 0:
             print(f"{self.player1.name} wins the game with {len(self.player1.hand)} cards!")
         else:
-            # Forced End condition
             if len(self.player1.hand) > len(self.player2.hand):
-                print(f"The game was interrupted. {self.player1.name} has the most cards with {len(self.player1.hand)} and is declared the winner!")
+                print(f"The game was interrupted. {self.player1.name} has the most cards with {len(self.player1.hand)} and is the winner!")
             elif len(self.player1.hand) < len(self.player2.hand):
-                print(f"The game was interrupted. {self.player2.name} has the most cards with {len(self.player2.hand)} and is declared the winner!")
+                print(f"The game was interrupted. {self.player2.name} has the most cards with {len(self.player2.hand)} and is the winner!")
             else:
                 print("The game was interrupted. It's a tie!")
 
