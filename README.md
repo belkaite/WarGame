@@ -1,6 +1,6 @@
 # 🃏 WarGame 🃏
 
-A war card game implemented using Python and following the Object-Oriented Programming paradigm. This project was developed collaboratively with peers. Many thanks to Egle and Gabriele for your contributions!
+A war card game implemented using Python and following the Object-Oriented Programming paradigm. The specifics of the 'war' are a bit simplified here. This project was developed collaboratively with peers. Many thanks to Egle and Gabriele for your contributions!
 
 ## 📜 Rules of the Game
 
