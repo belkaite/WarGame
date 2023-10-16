@@ -80,9 +80,6 @@ class Game:
     def start(self):
         self.player1.hand, self.player2.hand = self.deck.split()
 
-    def message(self):
-        pass
-
     def compare_cards(self, card1, card2):
         rank_order = [
             "2",
@@ -193,5 +190,4 @@ if __name__ == "__main__":
     player2_name = input("Enter the name of player 2: ")
     war_game = Game(player1_name, player2_name)
     war_game.start()
-    war_game.message()
     war_game.game_loop()
