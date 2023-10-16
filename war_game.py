@@ -1,12 +1,5 @@
 import random
 
-def get_player_names():
-    """
-    Get names of the two players.
-    """
-    player1 = input("Enter the name of player 1: ")
-    player2 = input("Enter the name of player 2: ")
-    return player1, player2
 
 class Card:
     """
@@ -60,40 +53,77 @@ class Player:
 # print(len(player1.hand))
 
 class Game:
+    """
+    Continuously play rounds until one player has all the cards.
+    """
+
     def __init__(self, player1_name, player2_name):
         self.player1 = Player(name=player1_name)
         self.player2 = Player(name=player2_name)
         self.deck = Deck()
         self.deck.shuffle()
     
+
     def start(self):
+        self.player1 = input("Enter the name of player 1: ")
+        self.player2 = input("Enter the name of player 2: ")
         self.player1.hand, self.player2.hand = self.deck.split()
 
     def message(self):
         print(f"Welcome {self.player1.name} and {self.player2.name}. Let’s start the game!")
 
     #Make sure players can show their top card when it's their turn.
+
+    def compare_cards(self, card1, card2):
+        """
+        Compares two cards. Returns:
+        - 0 if it's a tie.
+        - 1 if card1 is greater.
+        - 2 if card2 is greater.
+        """
+        rank_order = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
+
+        # Find the indices (positions) of the cards in the rank_order list
+        card1_rank = rank_order.index(card1.rank)
+        card2_rank = rank_order.index(card2.rank)
+
+        if card1_rank > card2_rank:
+            return 1
+        elif card1_rank < card2_rank:
+            return 2
+        else:
+            return 0
+
     def game_loop(self):
+        """
+        Executes the main game loop until one of the players runs out of cards.
+        """
+        # Ensuring that the game loop continues as long as both players have cards to play. 
+        while len(self.player1.hand) > 0 and len(self.player2.hand) > 0:
+            player1_card = self.player1.draw()
+            player2_card = self.player2.draw()
 
-        try:
-            while self.player1.hand != 0 or self.player2.hand != 0:
-                cards_shown = []
-                card_from_player1 = self.player1.draw
-                cards_shown.append(card_from_player1)
-                print(f"{player1.name} has placed {card_from_player1}")
+            print(f"{self.player1.name} reveals: {player1_card}")
+            print(f"{self.player2.name} reveals: {player2_card}")
 
-                card_from_player2 = self.player2.draw
-                cards_shown.append(card_from_player2)
-                print(f"{player2.name} has placed {card_from_player2}")
+            result = self.compare_cards(player1_card, player2_card)
 
-                #if #rankas is pirmo playerio == #rankas is antro playerio:
-                    #War logic
+            if result == 0:
+                # Tie - both cards are discarded
+                print("It's a tie! Both cards are discarded.")
 
-                
-        except:
-            pass
+            elif result == 1:
+                # Player 1 wins the round
+                self.player1.hand.extend([player1_card, player2_card])
+                print(f"{self.player1.name} wins the round and collects the cards.")
 
+            else:
+                # Player 2 wins the round
+                self.player2.hand.extend([player1_card, player2_card])
+                print(f"{self.player2.name} wins the round and collects the cards.")
 
     
-
+if __name__ == "__main__":
+    war_game = Game()
+    war_game.start()
 
